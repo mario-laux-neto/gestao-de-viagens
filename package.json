@@ -1,0 +1,23 @@
+{
+  "name": "viagensmoretto",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [
+    "moretto"
+  ],
+  "homepage": "https://github.com/mario-laux-neto/gestao-de-viagens#readme",
+  "bugs": {
+    "url": "https://github.com/mario-laux-neto/gestao-de-viagens/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mario-laux-neto/gestao-de-viagens.git"
+  },
+  "license": "ISC",
+  "author": "mario-laux-neto",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  }
+}
