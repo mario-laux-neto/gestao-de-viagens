@@ -1,6 +1,22 @@
-# Sistema de Organização de Viagens
+<p align="center">
+  <img src="docs/logo.png" alt="Logo Gestão de Viagens" width="180">
+</p>
 
-Sistema web para planejamento e gerenciamento de viagens pessoais, desenvolvido como projeto acadêmico para a disciplina de Desenvolvimento Web.
+<h1 align="center">Sistema de Organização de Viagens</h1>
+
+<p align="center">
+  Sistema web para planejamento e gerenciamento de viagens pessoais.<br>
+  Projeto acadêmico — Desenvolvimento Web — 2026
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Node.js-18+-339933?logo=node.js&logoColor=white" alt="Node.js">
+  <img src="https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=white" alt="React">
+  <img src="https://img.shields.io/badge/PostgreSQL-Supabase-4169E1?logo=postgresql&logoColor=white" alt="PostgreSQL">
+  <img src="https://img.shields.io/badge/Express-4-000000?logo=express&logoColor=white" alt="Express">
+</p>
+
+---
 
 Permite cadastrar destinos, montar roteiros com datas e acompanhar atividades em cada viagem — tudo com autenticação segura e painel de controle.
 
@@ -132,6 +148,8 @@ Base URL: `http://localhost:3000/api`
 
 Documentação detalhada dos endpoints no [README do backend](viagensback/README.md).
 
-## Licença
+---
 
-Projeto acadêmico — 2026
+<p align="center">
+  Feito com dedicação pela equipe Gestão de Viagens — 2026
+</p>

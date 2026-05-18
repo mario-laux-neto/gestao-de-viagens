@@ -1,6 +1,14 @@
-# Backend — Sistema de Organização de Viagens
+<p align="center">
+  <img src="../docs/logo.png" alt="Logo Gestão de Viagens" width="140">
+</p>
 
-API REST para gerenciamento de viagens, destinos, roteiros e atividades.
+<h1 align="center">Backend — Sistema de Organização de Viagens</h1>
+
+<p align="center">
+  API REST para gerenciamento de viagens, destinos, roteiros e atividades.
+</p>
+
+---
 
 ## Stack
 
@@ -308,6 +316,8 @@ npm test
 npm run test:watch
 ```
 
-## Licença
+---
 
-Projeto acadêmico — 2026
+<p align="center">
+  Projeto acadêmico — 2026
+</p>
