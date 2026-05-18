@@ -1,41 +1,35 @@
 require('dotenv').config();
 
+const baseConfig = {
+  dialect: 'postgres',
+  logging: false,
+  timezone: '-03:00',
+  define: {
+    timestamps: true,
+    underscored: true,
+    freezeTableName: false
+  },
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false
+    }
+  }
+};
+
 module.exports = {
   development: {
-    username: process.env.DB_USER || 'root',
-    password: process.env.DB_PASSWORD || '',
-    database: process.env.DB_NAME || 'viagens_db',
-    host: process.env.DB_HOST || 'localhost',
-    port: process.env.DB_PORT || 3306,
-    dialect: 'mysql',
-    logging: console.log,
-    timezone: '-03:00',
-    define: {
-      timestamps: true,
-      underscored: true,
-      underscoredAll: true,
-      freezeTableName: false
-    }
+    use_env_variable: 'DATABASE_URL',
+    ...baseConfig,
+    logging: console.log
   },
   test: {
-    username: process.env.DB_USER || 'root',
-    password: process.env.DB_PASSWORD || '',
-    database: process.env.DB_NAME_TEST || 'viagens_db_test',
-    host: process.env.DB_HOST || 'localhost',
-    port: process.env.DB_PORT || 3306,
-    dialect: 'mysql',
-    logging: false,
-    timezone: '-03:00'
+    use_env_variable: 'DATABASE_URL',
+    ...baseConfig
   },
   production: {
-    username: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME,
-    host: process.env.DB_HOST,
-    port: process.env.DB_PORT || 3306,
-    dialect: 'mysql',
-    logging: false,
-    timezone: '-03:00',
+    use_env_variable: 'DATABASE_URL',
+    ...baseConfig,
     pool: {
       max: 5,
       min: 0,
