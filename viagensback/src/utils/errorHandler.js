@@ -1,32 +1,33 @@
 class AppError extends Error {
-  constructor(message, statusCode = 500) {
+  constructor(message, statusCode, details = null) {
     super(message);
     this.statusCode = statusCode;
-    this.status = `${statusCode}`.startsWith('4') ? 'fail' : 'error';
+    this.details = details;
     this.isOperational = true;
-
-    Error.captureStackTrace(this, this.constructor);
   }
 }
 
-const handleSequelizeError = (error) => {
-  if (error.name === 'SequelizeValidationError') {
-    const errors = error.errors.map(err => err.message);
-    return new AppError(errors.join(', '), 400);
+const handleSequelizeError = (err) => {
+  if (err.isOperational) return err;
+
+  if (err.name === 'SequelizeValidationError') {
+    const details = err.errors.map(e => e.message);
+    return new AppError('Erro de validação', 400, details);
   }
 
-  if (error.name === 'SequelizeUniqueConstraintError') {
-    return new AppError('Duplicate field value entered', 400);
+  if (err.name === 'SequelizeUniqueConstraintError') {
+    return new AppError('Registro duplicado', 409);
   }
 
-  if (error.name === 'SequelizeForeignKeyConstraintError') {
-    return new AppError('Invalid reference to related entity', 400);
+  if (err.name === 'SequelizeForeignKeyConstraintError') {
+    return new AppError('Não é possível excluir: existem registros vinculados', 409);
   }
 
-  return error;
+  if (err.name === 'SequelizeDatabaseError') {
+    return new AppError('Erro no banco de dados', 500);
+  }
+
+  return err;
 };
 
-module.exports = {
-  AppError,
-  handleSequelizeError
-};
+module.exports = { AppError, handleSequelizeError };
