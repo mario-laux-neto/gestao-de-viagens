@@ -1,0 +1,57 @@
+.top-nav {
+  background-color: white;
+  border-bottom: 1px solid var(--bg-secondary);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 72px; /* Altura padrão de appbars */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-brand strong {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  color: var(--brand-dark);
+}
+
+.nav-links {
+  display: flex;
+  gap: 32px;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #888;
+  font-size: 14px;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.nav-link:hover, .nav-link.active {
+  color: var(--brand-dark);
+}
+
+.nav-profile .avatar-circle {
+  width: 36px;
+  height: 36px;
+  background-color: var(--bg-secondary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  color: var(--brand-dark);
+  cursor: pointer;
+}
+
+.page-content {
+  min-height: calc(100vh - 72px);
+}
