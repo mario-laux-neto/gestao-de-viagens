@@ -1,0 +1,23 @@
+:root {
+  /* Cores Principais */
+  --bg-primary: #FDFDFD;
+  --bg-secondary: #EAE6E2;
+  --brand-dark: #1E1B18;
+  --brand-accent: #8C6A5D;
+  
+  /* Status */
+  --status-success-bg: #E3F2E1;
+  --status-success-text: #2A5A27;
+  --status-warning-bg: #FFF2D1;
+  --status-warning-text: #735100;
+  --status-neutral-bg: #E5ECF4;
+  --status-neutral-text: #2B4560;
+
+  /* Tipografia (Fontes do Google) */
+  --font-serif: 'Fraunces', serif;
+  --font-sans: 'Inter', sans-serif;
+
+  /* Borda e Espaçamento */
+  --radius-md: 12px;
+  --radius-lg: 24px;
+}

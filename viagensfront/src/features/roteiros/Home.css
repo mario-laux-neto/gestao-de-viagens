@@ -1,0 +1,188 @@
+.home-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 24px;
+}
+
+/* --- Cabeçalho --- */
+.home-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 48px;
+}
+
+.home-welcome .subtitle {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: var(--brand-accent);
+  text-transform: uppercase;
+}
+
+.home-welcome h1 {
+  font-size: 36px;
+  color: var(--brand-dark);
+  margin: 8px 0;
+}
+
+.home-welcome .summary-text {
+  color: #666;
+  font-size: 16px;
+}
+
+.btn-primary {
+  background-color: var(--brand-dark);
+  color: #fff;
+  padding: 14px 24px;
+  border-radius: var(--radius-md);
+  font-weight: 500;
+  font-size: 16px;
+  transition: opacity 0.2s;
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+}
+
+/* --- Grid Principal --- */
+.home-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr; /* 70% / 30% */
+  gap: 32px;
+  margin-bottom: 48px;
+}
+
+.grid-left {
+  background-color: var(--brand-dark);
+  color: white;
+  padding: 40px;
+  border-radius: var(--radius-lg);
+  min-height: 300px;
+}
+
+.home-activities h3, .grid-right h3 {
+  font-size: 14px;
+  color: var(--brand-accent);
+  margin-bottom: 24px;
+}
+/* --- Próxima Viagem (Card Escuro) --- */
+.next-trip-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.next-trip-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.tag-gold {
+  color: #D4AF37; /* Dourado/Bege do design */
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.next-trip-card h2 {
+  font-size: 32px;
+  margin: 8px 0;
+}
+
+.next-trip-card p {
+  color: #A09E9C; /* Cinza claro quente */
+}
+
+.countdown-badge {
+  background-color: var(--bg-secondary);
+  color: var(--brand-dark);
+  padding: 8px 16px;
+  border-radius: var(--radius-lg);
+  font-size: 14px;
+}
+
+.next-trip-stats {
+  display: flex;
+  gap: 48px;
+  margin-top: 48px;
+  border-top: 1px solid rgba(255,255,255, 0.1);
+  padding-top: 24px;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.stat-label {
+  font-size: 12px;
+  color: #A09E9C;
+  letter-spacing: 1px;
+}
+
+.stat-value {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.stat-item.highlight .stat-value {
+  font-family: var(--font-serif);
+  color: #D4AF37;
+  font-size: 24px;
+}
+
+/* --- Outros Roteiros --- */
+.other-trips-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.trip-list-item {
+  background-color: white;
+  padding: 16px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+}
+
+.trip-avatar {
+  width: 40px;
+  height: 40px;
+  background-color: var(--bg-secondary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  color: var(--brand-dark);
+}
+
+.trip-info {
+  flex: 1;
+}
+
+.trip-info h4 {
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+
+.trip-info p {
+  font-size: 14px;
+  color: #666;
+}
+
+.btn-primary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.activity-icon-done {
+  color: var(--brand-dark);
+}
