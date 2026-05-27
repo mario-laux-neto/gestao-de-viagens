@@ -1,0 +1,358 @@
+.profile-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 36px 30px;
+}
+
+.breadcrumb {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  font-size: 12px;
+  color: var(--ink-mute);
+  margin-bottom: 20px;
+}
+
+.breadcrumb a {
+  color: var(--ink-mute);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s ease;
+}
+
+.breadcrumb a:hover {
+  color: var(--accent);
+}
+
+.breadcrumb .sep {
+  color: var(--ink-faint);
+}
+
+.profile-grid {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 28px;
+  align-items: start;
+  margin-top: 24px;
+}
+
+.profile-side {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 30px 22px;
+  text-align: center;
+  box-shadow: 0 4px 16px rgba(26, 26, 26, 0.02);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 110px circular avatar exactly as shown */
+.avatar-container {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+.profile-avatar {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: 48px;
+  border: 1.5px solid var(--line-soft);
+  overflow: hidden;
+}
+
+.profile-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+}
+
+/* Floating trash can icon overlapping the bottom-right of the circular avatar */
+.avatar-delete-badge {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  background: var(--white);
+  border: 1.5px solid var(--line);
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent) !important; /* Accent color #8a3a1f */
+  cursor: pointer;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+  z-index: 10;
+}
+
+.avatar-delete-badge:hover {
+  background: var(--accent-soft);
+  transform: scale(1.08);
+}
+
+.profile-name {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  color: var(--ink);
+  font-weight: 500;
+  line-height: 1.3;
+  margin: 0;
+}
+
+.profile-email {
+  font-size: 13px;
+  color: var(--ink-soft);
+  font-family: var(--font-sans);
+  margin-top: 4px;
+  margin-bottom: 0;
+  word-break: break-all;
+}
+
+.perfil-tag {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 700;
+  color: #6b6b6b;
+  background: #e6e3dc;
+  padding: 4px 12px;
+  border-radius: 4px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-top: 14px;
+  border: none;
+}
+
+.divider-vertical {
+  width: 100%;
+  height: 1px;
+  background: var(--line-soft);
+  margin: 22px 0;
+  border: none;
+}
+
+/* Button style from image */
+.btn-change-photo {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  color: var(--ink);
+  font-size: 12.5px;
+  font-weight: 500;
+  padding: 10px 16px;
+  width: 100%;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-family: inherit;
+}
+
+.btn-change-photo:hover {
+  background: var(--line-soft);
+  border-color: var(--ink-faint);
+}
+
+/* Text link Sair da conta in red/accent color */
+.btn-signout-link {
+  background: transparent;
+  border: none;
+  color: var(--accent); /* color #8a3a1f */
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 18px;
+  font-family: inherit;
+  transition: opacity 0.15s ease;
+  padding: 4px;
+}
+
+.btn-signout-link:hover {
+  opacity: 0.8;
+  text-decoration: underline;
+}
+
+/* Single unified card style */
+.card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 36px;
+  box-shadow: 0 4px 16px rgba(26, 26, 26, 0.02);
+}
+
+.card h3 {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 22px;
+  margin-top: 0;
+  border: none;
+  padding: 0;
+}
+
+.divider-horizontal {
+  height: 1px;
+  background: var(--line-soft);
+  margin: 32px 0;
+  border: none;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 18px;
+}
+
+/* Soft gray all-caps labels */
+.field label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 700;
+  color: #9a9a9a;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 4px;
+}
+
+.field input {
+  font-family: inherit;
+  font-size: 14px;
+  padding: 12px 14px;
+  border-radius: 5px;
+  border: 1px solid var(--line);
+  background: var(--white);
+  color: var(--ink);
+  outline: none;
+  transition: all 0.15s ease;
+  width: 100%;
+}
+
+.field input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.field-hint {
+  font-size: 11.5px;
+  color: var(--ink-faint);
+  margin-top: 4px;
+}
+
+/* Side-by-side row for password input fields */
+.password-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.input-pass {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.input-pass input {
+  padding-right: 80px;
+}
+
+.pass-toggle {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  color: var(--ink-mute);
+  font-family: inherit;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: var(--radius-md);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.15s ease;
+}
+
+.pass-toggle:hover {
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.row-flex {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+/* Grouped action buttons in bottom right */
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 32px;
+}
+
+.btn-cancel {
+  background: var(--white);
+  border: 1px solid var(--line);
+  color: var(--ink-soft);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 10px 24px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.15s ease;
+}
+
+.btn-cancel:hover {
+  background: var(--line-soft);
+}
+
+.btn-submit {
+  background: var(--accent);
+  color: white;
+  border: none;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 10px 24px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.15s ease;
+}
+
+.btn-submit:hover {
+  background: var(--accent-deep);
+}
+
+@media (max-width: 768px) {
+  .profile-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .password-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}

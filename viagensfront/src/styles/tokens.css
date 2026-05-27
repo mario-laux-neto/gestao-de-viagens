@@ -1,23 +1,38 @@
 :root {
-  /* Cores Principais */
-  --bg-primary: #FDFDFD;
-  --bg-secondary: #EAE6E2;
-  --brand-dark: #1E1B18;
-  --brand-accent: #8C6A5D;
+  --ink: #1a1a1a;
+  --ink-soft: #3a3a3a;
+  --ink-mute: #6b6b6b;
+  --ink-faint: #9a9a9a;
+  --line: #d8d4cc;
+  --line-soft: #ebe8e1;
+  --paper: #faf8f3;
+  --bg: #f0ece4;
+  --white: #ffffff;
+  --accent: #8a3a1f;
+  --accent-soft: #f3ebe4;
+  --accent-deep: #6e2d18;
+  --ok: #3c5a20;
+  --ok-bg: #dfe8d6;
+  --warn: #8a6b1f;
+  --warn-bg: #f1e9d2;
+  --muted-bg: #e6e3dc;
+
+  --bg-primary: var(--white);
+  --bg-secondary: var(--bg);
+  --brand-dark: var(--ink);
+  --brand-accent: var(--accent);
   
-  /* Status */
-  --status-success-bg: #E3F2E1;
-  --status-success-text: #2A5A27;
-  --status-warning-bg: #FFF2D1;
-  --status-warning-text: #735100;
-  --status-neutral-bg: #E5ECF4;
-  --status-neutral-text: #2B4560;
+  --status-success-bg: var(--ok-bg);
+  --status-success-text: var(--ok);
+  --status-warning-bg: var(--warn-bg);
+  --status-warning-text: var(--warn);
+  --status-neutral-bg: var(--muted-bg);
+  --status-neutral-text: var(--ink-soft);
 
-  /* Tipografia (Fontes do Google) */
-  --font-serif: 'Fraunces', serif;
-  --font-sans: 'Inter', sans-serif;
+  --font-serif: "Fraunces", Georgia, serif;
+  --font-sans: "Source Sans 3", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
 
-  /* Borda e Espaçamento */
-  --radius-md: 12px;
-  --radius-lg: 24px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
 }
