@@ -452,21 +452,19 @@ export function Home() {
 
                 <div className="field">
                   <label>Selecionar Destino Vinculado *</label>
-                  <select 
+                  <CustomSelect 
+                    key={`destino-${isModalOpen}`}
                     value={selectedDestinoId} 
-                    onChange={(e) => setSelectedDestinoId(e.target.value)}
-                    required
-                  >
-                    {destinos.length > 0 ? (
-                      destinos.map(dest => (
-                        <option key={dest.id} value={dest.id.toString()}>
-                          {dest.cidade}, {dest.pais}
-                        </option>
-                      ))
+                    onChange={setSelectedDestinoId}
+                    options={destinos.length > 0 ? (
+                      destinos.map(dest => ({
+                        value: dest.id.toString(),
+                        label: `${dest.cidade}, ${dest.pais}`
+                      }))
                     ) : (
-                      <option value="">Nenhum destino cadastrado - Crie um primeiro</option>
+                      [{ value: '', label: 'Nenhum destino cadastrado - Crie um primeiro' }]
                     )}
-                  </select>
+                  />
                 </div>
 
                 <div className="field-row">
@@ -492,6 +490,7 @@ export function Home() {
                 <div className="field">
                   <label>Status Inicial</label>
                   <CustomSelect 
+                    key={`status-${isModalOpen}`}
                     value={statusInput} 
                     onChange={setStatusInput} 
                     options={[
