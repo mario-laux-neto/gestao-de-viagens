@@ -4,6 +4,7 @@ import './styles.css';
 export function DatePicker({ value, onChange, placeholder = 'Selecione uma data', align = 'left' }) {
   const [isOpen, setIsOpen] = useState(false);
   const [currentDate, setCurrentDate] = useState(new Date(2026, 4, 25));
+  const [typedValue, setTypedValue] = useState('');
   const containerRef = useRef(null);
 
   const getActiveDate = () => {
@@ -22,6 +23,38 @@ export function DatePicker({ value, onChange, placeholder = 'Selecione uma data'
       setCurrentDate(new Date(activeDate.getFullYear(), activeDate.getMonth(), 1));
     }
   }, [value]);
+
+  useEffect(() => {
+    if (activeDate) {
+      const day = activeDate.getDate().toString().padStart(2, '0');
+      const month = (activeDate.getMonth() + 1).toString().padStart(2, '0');
+      const year = activeDate.getFullYear();
+      setTypedValue(`${day}/${month}/${year}`);
+    } else {
+      setTypedValue('');
+    }
+  }, [value]);
+
+  const handleInputChange = (e) => {
+    const val = e.target.value;
+    setTypedValue(val);
+    
+    // Check if matches DD/MM/YYYY format exactly
+    const regex = /^(\d{2})\/(\d{2})\/(\d{4})$/;
+    const match = val.match(regex);
+    if (match) {
+      const day = parseInt(match[1], 10);
+      const month = parseInt(match[2], 10) - 1;
+      const year = parseInt(match[3], 10);
+      const parsed = new Date(year, month, day);
+      if (!isNaN(parsed.getTime()) && parsed.getFullYear() === year && parsed.getMonth() === month && parsed.getDate() === day) {
+        const yStr = year.toString();
+        const mStr = (month + 1).toString().padStart(2, '0');
+        const dStr = day.toString().padStart(2, '0');
+        onChange(`${yStr}-${mStr}-${dStr}`);
+      }
+    }
+  };
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -138,10 +171,14 @@ export function DatePicker({ value, onChange, placeholder = 'Selecione uma data'
       <div className="dp-input-wrapper" onClick={() => setIsOpen(!isOpen)}>
         <input
           type="text"
-          readOnly
           placeholder={placeholder}
-          value={formatInputValue()}
+          value={typedValue}
+          onChange={handleInputChange}
           className="dp-field-input"
+          onClick={(e) => {
+            e.stopPropagation();
+            setIsOpen(true);
+          }}
         />
         <span className="dp-icon">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
