@@ -1,4 +1,4 @@
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const { Usuario } = require('../models');
 const { AppError } = require('../utils/errorHandler');
 
