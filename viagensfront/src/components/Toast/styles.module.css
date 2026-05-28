@@ -1,0 +1,100 @@
+.toast {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: 12px 16px;
+  background-color: var(--white);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--line);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  font-family: var(--font-sans);
+  min-width: 280px;
+  max-width: 450px;
+  z-index: 1100;
+  transition: all 0.2s ease-in-out;
+  animation: slideInRight 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.success {
+  border-left: 4px solid var(--ok);
+}
+
+.success .icon {
+  color: var(--ok);
+}
+
+.error {
+  border-left: 4px solid var(--accent);
+}
+
+.error .icon {
+  color: var(--accent);
+}
+
+.info {
+  border-left: 4px solid var(--ink-soft);
+}
+
+.info .icon {
+  color: var(--ink-soft);
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.content {
+  flex-grow: 1;
+}
+
+.message {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.closeBtn {
+  background: transparent;
+  border: none;
+  color: var(--ink-faint);
+  cursor: pointer;
+  padding: 2px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+  margin-left: 4px;
+  flex-shrink: 0;
+}
+
+.closeBtn:hover {
+  background-color: var(--line-soft);
+  color: var(--ink-soft);
+}
+
+.closeBtn svg {
+  width: 14px;
+  height: 14px;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
