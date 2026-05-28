@@ -5,6 +5,7 @@ import { Home } from '../features/roteiros/Home';
 import { Profile } from '../features/auth/Profile';
 import { Atividades } from '../features/atividades/Atividades';
 import { Login } from '../features/auth/Login';
+import { Register } from '../features/auth/Register';
 import { useAuth } from '../contexts/AuthContext';
 
 function ProtectedRoute({ children }) {
@@ -53,6 +54,16 @@ export function AppRoutes() {
           element={
             <PublicRoute>
               <Login />
+            </PublicRoute>
+          } 
+        />
+
+        {/* Rota pública de Cadastro */}
+        <Route 
+          path="/cadastro" 
+          element={
+            <PublicRoute>
+              <Register />
             </PublicRoute>
           } 
         />
