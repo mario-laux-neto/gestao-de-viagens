@@ -1,0 +1,35 @@
+.tag {
+  padding: 4px 12px;
+  border-radius: var(--radius-lg);
+  font-size: 12px;
+  font-weight: 500;
+  display: inline-block;
+  text-align: center;
+  font-family: var(--font-sans);
+  user-select: none;
+}
+
+.success {
+  background-color: var(--status-success-bg);
+  color: var(--status-success-text);
+}
+
+.warning {
+  background-color: var(--status-warning-bg);
+  color: var(--status-warning-text);
+}
+
+.neutral {
+  background-color: var(--status-neutral-bg);
+  color: var(--status-neutral-text);
+}
+
+.pending {
+  background-color: #F0F0F0;
+  color: #666;
+}
+
+.info {
+  background-color: var(--accent-soft);
+  color: var(--accent);
+}
