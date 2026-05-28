@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import './Login.css';
 
@@ -136,13 +136,7 @@ export function Login() {
               </button>
             </form>
             <p className="auth-foot">
-              Não tem conta?{' '}
-              <a 
-                href="#" 
-                onClick={(e) => handleNotImplemented(e, 'Cadastro')}
-              >
-                Cadastrar-se
-              </a>
+              Não tem conta? <Link to="/cadastro">Cadastrar-se</Link>
             </p>
           </div>
         </div>
