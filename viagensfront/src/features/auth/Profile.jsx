@@ -11,12 +11,13 @@ export function Profile() {
   const navigate = useNavigate();
   const fileInputRef = useRef(null);
 
-  // Personal data states
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
   const [perfil, setPerfil] = useState('comum');
   
-  // Password states
+  const [fotoArquivo, setFotoArquivo] = useState(null);
+  const [fotoPreview, setFotoPreview] = useState(usuario?.foto || null);
+
   const [senhaAtual, setSenhaAtual] = useState('');
   const [novaSenha, setNovaSenha] = useState('');
   const [showSenhaAtual, setShowSenhaAtual] = useState(false);
@@ -37,6 +38,10 @@ export function Profile() {
       setNome(dadosUsuario.nome);
       setEmail(dadosUsuario.email);
       setPerfil(dadosUsuario.perfil || 'comum');
+      if (dadosUsuario.foto) {
+        setFotoPreview(dadosUsuario.foto);
+        atualizarUsuario({ foto: dadosUsuario.foto });
+      }
     } catch (err) {
       console.error("Erro ao carregar dados de perfil do backend:", err);
       toast.error("Não foi possível carregar as informações do seu perfil.");
@@ -44,6 +49,7 @@ export function Profile() {
         setNome(usuario.nome || '');
         setEmail(usuario.email || '');
         setPerfil(usuario.perfil || 'comum');
+        setFotoPreview(usuario.foto || null);
       }
     } finally {
       setCarregandoDados(false);
@@ -57,7 +63,6 @@ export function Profile() {
       return;
     }
 
-    // Se uma das senhas for digitada, ambas devem ser fornecidas
     if (senhaAtual || novaSenha) {
       if (!senhaAtual || !novaSenha) {
         toast.error("Para alterar sua senha, preencha tanto a senha atual quanto a nova senha.");
@@ -71,10 +76,24 @@ export function Profile() {
 
     setSalvandoDados(true);
     try {
-      // 1. Atualizar dados cadastrais
-      await api.put(`/usuarios/${usuario.id}`, { nome, email });
+      const formData = new FormData();
+      formData.append('nome', nome);
+      formData.append('email', email);
+
+      if (fotoArquivo) {
+        formData.append('foto', fotoArquivo);
+      } else if (fotoPreview === null) {
+        formData.append('removerFoto', 'true');
+      }
+
+      const response = await api.put(`/usuarios/${usuario.id}`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
       
-      // 2. Se as senhas foram preenchidas, atualizar a senha
+      const dadosUsuarioAtualizado = response.data.data;
+      
       if (senhaAtual && novaSenha) {
         await api.put('/usuarios/trocar-senha', {
           senha_atual: senhaAtual,
@@ -84,8 +103,13 @@ export function Profile() {
         setNovaSenha('');
       }
 
-      // 3. Atualizar contexto do auth
-      atualizarUsuario({ nome, email });
+      atualizarUsuario({ 
+        nome: dadosUsuarioAtualizado.nome, 
+        email: dadosUsuarioAtualizado.email,
+        foto: dadosUsuarioAtualizado.foto || null
+      });
+      
+      setFotoArquivo(null);
       toast.success("Dados atualizados com sucesso!");
     } catch (err) {
       console.error("Erro ao salvar alterações:", err);
@@ -99,9 +123,14 @@ export function Profile() {
     if (usuario) {
       setNome(usuario.nome || '');
       setEmail(usuario.email || '');
+      setFotoPreview(usuario.foto || null);
+      setFotoArquivo(null);
     }
     setSenhaAtual('');
     setNovaSenha('');
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
     toast.success("Alterações descartadas.");
   };
 
@@ -114,27 +143,32 @@ export function Profile() {
       return;
     }
 
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      atualizarUsuario({ foto: reader.result });
-      toast.success("Foto de perfil atualizada!");
-    };
-    reader.readAsDataURL(file);
+    setFotoArquivo(file);
+    setFotoPreview(URL.createObjectURL(file));
   };
 
   const handlePhotoDelete = (e) => {
     e.stopPropagation();
-    atualizarUsuario({ foto: null });
+    setFotoArquivo(null);
+    setFotoPreview(null);
     if (fileInputRef.current) {
       fileInputRef.current.value = '';
     }
-    toast.success("Foto de perfil removida.");
+    toast.success("Foto de perfil removida da pré-visualização. Clique em 'Salvar' para confirmar.");
   };
 
   const handleLogout = () => {
     logout();
     toast.success("Sessão encerrada!");
     navigate('/login');
+  };
+
+  const getFotoUrl = (foto) => {
+    if (!foto) return null;
+    if (foto.startsWith('data:') || foto.startsWith('blob:') || foto.startsWith('http')) {
+      return foto;
+    }
+    return `http://localhost:3000${foto}`;
   };
 
   const firstLetter = nome ? nome.charAt(0).toUpperCase() : 'U';
@@ -161,17 +195,16 @@ export function Profile() {
         </div>
       ) : (
         <div className="profile-grid">
-          {/* Left Column: Summary & Actions */}
           <aside className="profile-side">
             <div className="avatar-container">
               <div className="profile-avatar">
-                {usuario?.foto ? (
-                  <img src={usuario.foto} alt={nome} />
+                {fotoPreview ? (
+                  <img src={getFotoUrl(fotoPreview)} alt={nome} />
                 ) : (
                   firstLetter
                 )}
               </div>
-              {usuario?.foto && (
+              {fotoPreview && (
                 <button 
                   type="button" 
                   className="avatar-delete-badge" 
@@ -220,7 +253,6 @@ export function Profile() {
             </button>
           </aside>
 
-          {/* Right Column: Unified Personal & Password Card Form */}
           <section className="profile-forms">
             <div className="card">
               <form onSubmit={handleUpdateProfile}>

@@ -10,6 +10,14 @@ export function AppLayout() {
   const userNome = usuario?.nome || "Maria Hoppe";
   const userAvatar = userNome.charAt(0).toUpperCase();
 
+  const getFotoUrl = (foto) => {
+    if (!foto) return null;
+    if (foto.startsWith('data:') || foto.startsWith('blob:') || foto.startsWith('http')) {
+      return foto;
+    }
+    return `http://localhost:3000${foto}`;
+  };
+
   return (
     <div className="app-layout">
       <nav className="appbar">
@@ -34,7 +42,7 @@ export function AppLayout() {
             <span className="avatar">
               {usuario?.foto ? (
                 <img 
-                  src={usuario.foto} 
+                  src={getFotoUrl(usuario.foto)} 
                   alt={userNome} 
                   style={{ width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover', display: 'block' }} 
                 />
