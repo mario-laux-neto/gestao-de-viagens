@@ -1,0 +1,305 @@
+/* ── Layout da página ── */
+.destinos-page {
+    padding: var(--spacing-xl) var(--spacing-xxl);
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* ── Cabeçalho ── */
+.destinos-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--spacing-xl);
+}
+
+.destinos-header h1 {
+    font-family: var(--font-serif);
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--ink);
+}
+
+.btn-novo-destino {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    background: var(--accent);
+    color: var(--white);
+    border: none;
+    border-radius: var(--radius-md);
+    padding: 10px 20px;
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-novo-destino:hover {
+    background: var(--accent-deep);
+}
+
+/* ── Barra de busca ── */
+.destinos-search {
+    margin-bottom: var(--spacing-xl);
+}
+
+.destinos-search input {
+    width: 100%;
+    max-width: 400px;
+    padding: 10px var(--spacing-md);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    font-family: var(--font-sans);
+    font-size: 14px;
+    color: var(--ink);
+    background: var(--white);
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.destinos-search input:focus {
+    border-color: var(--accent);
+}
+
+/* ── Grid de cards ── */
+.destinos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--spacing-lg);
+}
+
+/* ── Card ── */
+.destino-card {
+    background: var(--white);
+    border: 1px solid var(--line-soft);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    transition: box-shadow 0.2s, transform 0.2s;
+    cursor: pointer;
+}
+
+.destino-card:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+}
+
+.destino-card-nome {
+    font-family: var(--font-serif);
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--ink);
+}
+
+.destino-card-pais {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    color: var(--ink-mute);
+}
+
+.destino-card-descricao {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+    flex: 1;
+}
+
+.destino-card-acoes {
+    display: flex;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-sm);
+    padding-top: var(--spacing-sm);
+    border-top: 1px solid var(--line-soft);
+}
+
+.btn-editar,
+.btn-excluir {
+    flex: 1;
+    padding: 6px 12px;
+    border-radius: var(--radius-md);
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-editar {
+    background: var(--accent-soft);
+    color: var(--accent);
+}
+
+.btn-editar:hover {
+    background: var(--accent);
+    color: var(--white);
+}
+
+.btn-excluir {
+    background: var(--muted-bg);
+    color: var(--ink-mute);
+}
+
+.btn-excluir:hover {
+    background: #fde8e8;
+    color: #c0392b;
+}
+
+/* ── Estado vazio ── */
+.destinos-empty {
+    text-align: center;
+    padding: var(--spacing-3xl) 0;
+    color: var(--ink-mute);
+}
+
+.destinos-empty p {
+    font-family: var(--font-sans);
+    font-size: 15px;
+    margin-top: var(--spacing-sm);
+}
+
+/* ── Modal ── */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-box {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    width: 100%;
+    max-width: 500px;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.15);
+}
+
+.modal-box h2 {
+    font-family: var(--font-serif);
+    font-size: 22px;
+    color: var(--ink);
+    margin-bottom: var(--spacing-lg);
+}
+
+.modal-field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+    margin-bottom: var(--spacing-md);
+}
+
+.modal-field label {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.modal-field input,
+.modal-field textarea {
+    padding: 10px var(--spacing-md);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    font-family: var(--font-sans);
+    font-size: 14px;
+    color: var(--ink);
+    background: var(--white);
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.modal-field input:focus,
+.modal-field textarea:focus {
+    border-color: var(--accent);
+}
+
+.modal-field textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.modal-actions {
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: flex-end;
+    margin-top: var(--spacing-lg);
+}
+
+.btn-cancelar {
+    padding: 10px 20px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    background: var(--white);
+    font-family: var(--font-sans);
+    font-size: 14px;
+    color: var(--ink-mute);
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-cancelar:hover {
+    background: var(--bg);
+}
+
+.btn-salvar {
+    padding: 10px 20px;
+    border: none;
+    border-radius: var(--radius-md);
+    background: var(--accent);
+    color: var(--white);
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-salvar:hover {
+    background: var(--accent-deep);
+}
+
+.btn-salvar:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* ── Estilos do Modal de Confirmação de Exclusão ── */
+.modal-confirm {
+    max-width: 440px;
+}
+
+.confirm-text {
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    margin-bottom: var(--spacing-lg);
+}
+
+.btn-perigo {
+    padding: 10px 20px;
+    border: none;
+    border-radius: var(--radius-md);
+    background: #c0392b;
+    color: var(--white);
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-perigo:hover {
+    background: #962d22;
+}

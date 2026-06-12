@@ -36,4 +36,15 @@ const redefinirSenha = async (req, res, next) => {
   }
 };
 
-module.exports = { registro, login, esqueciSenha, redefinirSenha };
+// ... (outros métodos do controller)
+
+const validarToken = async (req, res, next) => {
+  try {
+    const data = await authService.validarToken(req.body);
+    res.json({ data });
+  } catch (err) {
+    next(err);
+  }
+};
+
+module.exports = { registro, login, esqueciSenha, redefinirSenha, validarToken };

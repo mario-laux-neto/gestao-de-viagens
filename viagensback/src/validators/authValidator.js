@@ -48,3 +48,12 @@ const redefinirSenha = Joi.object({
 });
 
 module.exports = { registro, login, esqueciSenha, redefinirSenha };
+
+// ... (outros validadores existentes)
+
+const validarToken = Joi.object({
+  token: Joi.string().required()
+    .messages({ 'any.required': 'Token é obrigatório' })
+});
+
+module.exports = { registro, login, esqueciSenha, redefinirSenha, validarToken };
