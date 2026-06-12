@@ -4,13 +4,17 @@ import { AppLayout } from '../layouts/AppLayout';
 import { Home } from '../features/roteiros/Home';
 import { Profile } from '../features/auth/Profile';
 import { Atividades } from '../features/atividades/Atividades';
+import { Destinos } from '../features/destinos/pages/Destinos';
+import { Roteiros } from '../features/roteiros/pages/Roteiros';
 import { Login } from '../features/auth/Login';
 import { Register } from '../features/auth/Register';
 import { useAuth } from '../contexts/AuthContext';
+import { ForgotPassword } from '../features/auth/ForgotPassword';
+import { ResetPassword } from '../features/auth/ResetPassword';
 
 function ProtectedRoute({ children }) {
   const { isAuthenticated, loading } = useAuth();
-  
+
   if (loading) {
     return (
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', fontFamily: 'var(--font-serif)', fontSize: '18px', color: 'var(--ink-soft)' }}>
@@ -18,17 +22,17 @@ function ProtectedRoute({ children }) {
       </div>
     );
   }
-  
+
   if (!isAuthenticated) {
     return <Navigate to="/login" replace />;
   }
-  
+
   return children;
 }
 
 function PublicRoute({ children }) {
   const { isAuthenticated, loading } = useAuth();
-  
+
   if (loading) {
     return (
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', fontFamily: 'var(--font-serif)', fontSize: '18px', color: 'var(--ink-soft)' }}>
@@ -36,11 +40,11 @@ function PublicRoute({ children }) {
       </div>
     );
   }
-  
+
   if (isAuthenticated) {
     return <Navigate to="/" replace />;
   }
-  
+
   return children;
 }
 
@@ -49,27 +53,46 @@ export function AppRoutes() {
     <BrowserRouter>
       <Routes>
         {/* Rota pública de Login */}
-        <Route 
-          path="/login" 
+        <Route
+          path="/login"
           element={
             <PublicRoute>
               <Login />
             </PublicRoute>
-          } 
+          }
         />
 
         {/* Rota pública de Cadastro */}
-        <Route 
-          path="/cadastro" 
+        <Route
+          path="/cadastro"
           element={
             <PublicRoute>
               <Register />
             </PublicRoute>
-          } 
+          }
+        />
+        {/* Rota pública de Esqueci a Senha */}
+        <Route
+          path="/esqueci-senha"
+          element={
+            <PublicRoute>
+              <ForgotPassword />
+            </PublicRoute>
+          }
+        />
+
+        {/* Rota pública de Redefinir Senha */}
+        <Route
+          path="/redefinir-senha"
+          element={
+            <PublicRoute>
+              <ResetPassword />
+            </PublicRoute>
+          }
         />
 
         {/* Rotas protegidas envolvidas pelo layout e pela verificação de auth */}
-        <Route 
+        <Route
           element={
             <ProtectedRoute>
               <AppLayout />
@@ -77,6 +100,8 @@ export function AppRoutes() {
           }
         >
           <Route path="/" element={<Home />} />
+          <Route path="/roteiros" element={<Roteiros />} />
+          <Route path="/destinos" element={<Destinos />} />
           <Route path="/atividades" element={<Atividades />} />
           <Route path="/perfil" element={<Profile />} />
         </Route>
