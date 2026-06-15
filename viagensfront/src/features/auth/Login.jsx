@@ -10,7 +10,7 @@ import './Login.css';
 export function Login() {
   const { login } = useAuth();
   const navigate = useNavigate();
-  
+
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const [loading, setLoading] = useState(false);
@@ -65,7 +65,7 @@ export function Login() {
           <div className="auth-form-side">
             <h2>Entrar</h2>
             <p className="lede">Acesse sua conta para continuar planejando.</p>
-            
+
             <form onSubmit={handleSubmit}>
               <Input
                 id="email"
@@ -77,7 +77,7 @@ export function Login() {
                 required
                 disabled={loading}
               />
-              
+
               <PasswordInput
                 id="senha"
                 label="Senha"
@@ -91,22 +91,23 @@ export function Login() {
 
               <div className="row-flex" style={{ justifyContent: 'space-between', marginBottom: '20px' }}>
                 <label className="checkbox-row">
-                  <input 
-                    type="checkbox" 
-                    checked={keepConnected} 
+                  <input
+                    type="checkbox"
+                    checked={keepConnected}
                     onChange={(e) => setKeepConnected(e.target.checked)}
                   />
                   Manter conectado
                 </label>
-                <a 
-                  href="#" 
-                  onClick={(e) => handleNotImplemented(e, 'Recuperação de Senha')}
+                <Link
+                  to="/esqueci-senha"
                   style={{ fontSize: '12px', color: 'var(--accent)', textDecoration: 'none', fontWeight: '600' }}
                 >
                   Esqueci a senha
-                </a>
+                </Link>
+
+
               </div>
-              
+
               <Button
                 type="submit"
                 variant="accent"
