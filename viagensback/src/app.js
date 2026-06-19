@@ -1,3 +1,4 @@
+require('pg'); // force nft to include pg in the serverless bundle
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
@@ -7,11 +8,12 @@ const { handleSequelizeError } = require('./utils/errorHandler');
 
 const app = express();
 
+app.set('trust proxy', 1);
 app.use(helmet());
 app.use(geral);
 
 app.use(cors({
-  origin: process.env.CORS_ORIGIN || 'http://localhost:5173',
+  origin: (process.env.CORS_ORIGIN || 'http://localhost:5173').trim(),
   credentials: true
 }));
 
