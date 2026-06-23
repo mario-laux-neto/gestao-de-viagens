@@ -1,3 +1,4 @@
+require('pg'); // force nft to include pg in the serverless bundle
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
@@ -9,7 +10,6 @@ const app = express();
 
 // Necessário atrás de proxy (ex.: Vercel) para o rate limit e o IP do cliente funcionarem
 app.set('trust proxy', 1);
-
 app.use(helmet());
 app.use(geral);
 
