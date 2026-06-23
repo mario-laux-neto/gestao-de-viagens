@@ -8,12 +8,18 @@ const { handleSequelizeError } = require('./utils/errorHandler');
 
 const app = express();
 
+// Necessário atrás de proxy (ex.: Vercel) para o rate limit e o IP do cliente funcionarem
 app.set('trust proxy', 1);
 app.use(helmet());
 app.use(geral);
 
+// Aceita uma ou várias origens separadas por vírgula em CORS_ORIGIN
+const origensPermitidas = (process.env.CORS_ORIGIN || 'http://localhost:5173')
+  .split(',')
+  .map((origem) => origem.trim());
+
 app.use(cors({
-  origin: (process.env.CORS_ORIGIN || 'http://localhost:5173').trim(),
+  origin: origensPermitidas,
   credentials: true
 }));
 
