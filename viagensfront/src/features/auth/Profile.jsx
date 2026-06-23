@@ -76,20 +76,9 @@ export function Profile() {
 
     setSalvandoDados(true);
     try {
-      const formData = new FormData();
-      formData.append('nome', nome);
-      formData.append('email', email);
-
-      if (fotoArquivo) {
-        formData.append('foto', fotoArquivo);
-      } else if (fotoPreview === null) {
-        formData.append('removerFoto', 'true');
-      }
-
-      const response = await api.put(`/usuarios/${usuario.id}`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
+      const response = await api.put(`/usuarios/${usuario.id}`, {
+        nome,
+        email
       });
       
       const dadosUsuarioAtualizado = response.data.data;
