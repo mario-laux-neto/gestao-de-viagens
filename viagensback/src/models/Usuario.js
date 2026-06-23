@@ -32,6 +32,10 @@ module.exports = (sequelize) => {
     reset_token_expira: {
       type: DataTypes.DATE,
       allowNull: true
+    },
+    foto: {
+      type: DataTypes.TEXT,
+      allowNull: true
     }
   }, {
     tableName: 'usuarios'

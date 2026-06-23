@@ -25,6 +25,9 @@ export function Profile() {
 
   const [carregandoDados, setCarregandoDados] = useState(true);
   const [salvandoDados, setSalvandoDados] = useState(false);
+  const [salvandoFoto, setSalvandoFoto] = useState(false);
+
+  const temFotoAlterada = fotoPreview !== (usuario?.foto || null);
 
   useEffect(() => {
     carregarPerfilCompleto();
@@ -38,10 +41,12 @@ export function Profile() {
       setNome(dadosUsuario.nome);
       setEmail(dadosUsuario.email);
       setPerfil(dadosUsuario.perfil || 'comum');
-      if (dadosUsuario.foto) {
-        setFotoPreview(dadosUsuario.foto);
-        atualizarUsuario({ foto: dadosUsuario.foto });
-      }
+      setFotoPreview(dadosUsuario.foto || null);
+      atualizarUsuario({
+        nome: dadosUsuario.nome,
+        email: dadosUsuario.email,
+        foto: dadosUsuario.foto || null
+      });
     } catch (err) {
       console.error("Erro ao carregar dados de perfil do backend:", err);
       toast.error("Não foi possível carregar as informações do seu perfil.");
@@ -98,7 +103,6 @@ export function Profile() {
         foto: dadosUsuarioAtualizado.foto || null
       });
       
-      setFotoArquivo(null);
       toast.success("Dados atualizados com sucesso!");
     } catch (err) {
       console.error("Erro ao salvar alterações:", err);
@@ -132,8 +136,12 @@ export function Profile() {
       return;
     }
 
-    setFotoArquivo(file);
-    setFotoPreview(URL.createObjectURL(file));
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setFotoArquivo(file);
+      setFotoPreview(reader.result);
+    };
+    reader.readAsDataURL(file);
   };
 
   const handlePhotoDelete = (e) => {
@@ -143,7 +151,39 @@ export function Profile() {
     if (fileInputRef.current) {
       fileInputRef.current.value = '';
     }
-    toast.success("Foto de perfil removida da pré-visualização. Clique em 'Salvar' para confirmar.");
+    toast.success("Foto removida da visualização. Salve para confirmar.");
+  };
+
+  const handleSavePhoto = async () => {
+    setSalvandoFoto(true);
+    try {
+      const response = await api.put(`/usuarios/${usuario.id}`, {
+        foto: fotoPreview
+      });
+      
+      const dadosUsuarioAtualizado = response.data.data;
+      
+      atualizarUsuario({ 
+        foto: dadosUsuarioAtualizado.foto || null
+      });
+      
+      setFotoArquivo(null);
+      toast.success("Foto de perfil atualizada com sucesso!");
+    } catch (err) {
+      console.error("Erro ao salvar foto de perfil:", err);
+      toast.error("Erro ao salvar foto de perfil.");
+    } finally {
+      setSalvandoFoto(false);
+    }
+  };
+
+  const handleCancelPhoto = () => {
+    setFotoPreview(usuario?.foto || null);
+    setFotoArquivo(null);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
+    toast.success("Alterações de foto descartadas.");
   };
 
   const handleLogout = () => {
@@ -224,22 +264,45 @@ export function Profile() {
               onChange={handlePhotoUpload} 
             />
 
-            <button 
-              type="button"
-              className="btn-change-photo"
-              onClick={() => fileInputRef.current?.click()}
-            >
-              Trocar foto
-            </button>
+            {temFotoAlterada ? (
+              <div className="avatar-actions-row">
+                <button 
+                  type="button" 
+                  className="btn-cancel-photo"
+                  onClick={handleCancelPhoto}
+                  disabled={salvandoFoto}
+                >
+                  Cancelar
+                </button>
+                <button 
+                  type="button" 
+                  className="btn-save-photo"
+                  onClick={handleSavePhoto}
+                  disabled={salvandoFoto}
+                >
+                  {salvandoFoto ? 'Salvando...' : 'Salvar'}
+                </button>
+              </div>
+            ) : (
+              <>
+                <button 
+                  type="button"
+                  className="btn-change-photo"
+                  onClick={() => fileInputRef.current?.click()}
+                >
+                  Trocar foto
+                </button>
 
-            <button 
-              type="button"
-              onClick={handleLogout} 
-              className="btn-signout-link"
-              title="Encerrar sessão"
-            >
-              Sair da conta
-            </button>
+                <button 
+                  type="button"
+                  onClick={handleLogout} 
+                  className="btn-signout-link"
+                  title="Encerrar sessão"
+                >
+                  Sair da conta
+                </button>
+              </>
+            )}
           </aside>
 
           <section className="profile-forms">
