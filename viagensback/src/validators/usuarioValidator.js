@@ -6,7 +6,8 @@ const atualizar = Joi.object({
   email: Joi.string().email().max(120)
     .messages({ 'string.email': 'Email inválido' }),
   perfil: Joi.string().valid('admin', 'comum')
-    .messages({ 'any.only': 'Perfil inválido' })
+    .messages({ 'any.only': 'Perfil inválido' }),
+  foto: Joi.string().allow(null, '')
 }).min(1).messages({ 'object.min': 'Informe ao menos um campo para atualizar' });
 
 const trocarSenha = Joi.object({

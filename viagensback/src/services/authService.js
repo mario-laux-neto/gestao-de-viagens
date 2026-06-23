@@ -24,7 +24,7 @@ const registro = async ({ nome, email, senha }) => {
   const token = gerarToken(usuario);
 
   return {
-    usuario: { id: usuario.id, nome: usuario.nome, email: usuario.email, perfil: usuario.perfil },
+    usuario: { id: usuario.id, nome: usuario.nome, email: usuario.email, perfil: usuario.perfil, foto: usuario.foto },
     token
   };
 };
@@ -39,7 +39,7 @@ const login = async ({ email, senha }) => {
   const token = gerarToken(usuario);
 
   return {
-    usuario: { id: usuario.id, nome: usuario.nome, email: usuario.email, perfil: usuario.perfil },
+    usuario: { id: usuario.id, nome: usuario.nome, email: usuario.email, perfil: usuario.perfil, foto: usuario.foto },
     token
   };
 };
